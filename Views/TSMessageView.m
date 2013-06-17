@@ -116,12 +116,17 @@ static NSMutableDictionary *_notificationDesign;
                 currentString = @"warning";
                 break;
             }
-                
+            case TSMessageNotificationTypeZongaError:
+            {
+                currentString = @"zonga_error";
+                break;
+            }
             default:
                 break;
         }
         
         current = [notificationDesign valueForKey:currentString];
+        NSAssert1(current == nil, @"Undefined properties for type %@", currentString);
         
         self.alpha = 0.0;
         
