@@ -8,10 +8,11 @@
 
 #import "TSMessageView.h"
 #import "UIColor+MLColorAdditions.h"
+#import <QuartzCore/QuartzCore.h>
 
-#define TSMessageViewPadding 15.0
+#define TSMessageViewPadding 10.0
 
-#define TSDesignFileName @"design.json"
+#define TSDesignFileName @"designs.json"
 
 static NSMutableDictionary *_notificationDesign;
 
@@ -126,7 +127,7 @@ static NSMutableDictionary *_notificationDesign;
         }
         
         current = [notificationDesign valueForKey:currentString];
-        NSAssert1(current == nil, @"Undefined properties for type %@", currentString);
+        NSAssert1(current != nil, @"Undefined properties for type %@", currentString);
         
         self.alpha = 0.0;
         
@@ -244,13 +245,13 @@ static NSMutableDictionary *_notificationDesign;
         }
         
         // Add a border on the bottom (or on the top, depending on the view's postion)
-        _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
+        _borderView = [[UIView alloc] initWithFrame:CGRectMake(TSMessageViewPadding,
                                                                0.0, // will be set later
-                                                               screenWidth,
+                                                               screenWidth - 2 * TSMessageViewPadding,
                                                                [[current valueForKey:@"borderHeight"] floatValue])];
         self.borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]
                                                            alpha:1.0];
-        self.borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+//        self.borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
         [self addSubview:self.borderView];
         
         
@@ -298,7 +299,7 @@ static NSMutableDictionary *_notificationDesign;
     
     
     self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
-                                       TSMessageViewPadding,
+                                       0,
                                        screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
                                        0.0);
     [self.titleLabel sizeToFit];
@@ -319,7 +320,7 @@ static NSMutableDictionary *_notificationDesign;
         currentHeight = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
     }
     
-    currentHeight += TSMessageViewPadding;
+    currentHeight += TSMessageViewPadding / 2;
     
     if (self.iconImageView)
     {
@@ -362,11 +363,10 @@ static NSMutableDictionary *_notificationDesign;
     }
     
     
-    self.backgroundImageView.frame = CGRectMake(self.backgroundImageView.frame.origin.x,
+    self.backgroundImageView.frame = CGRectMake(0,
                                                 self.backgroundImageView.frame.origin.y,
                                                 screenWidth,
                                                 currentHeight);
-    
     return currentHeight;
 }
 
