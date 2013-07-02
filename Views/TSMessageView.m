@@ -122,6 +122,11 @@ static NSMutableDictionary *_notificationDesign;
                 currentString = @"zonga_error";
                 break;
             }
+            case TSMessageNotificationTypeZongaMessage:
+            {
+                currentString = @"zonga_message";
+                break;
+            }
             default:
                 break;
         }
@@ -181,7 +186,7 @@ static NSMutableDictionary *_notificationDesign;
             [self.contentLabel setShadowOffset:self.titleLabel.shadowOffset];
             self.contentLabel.lineBreakMode = self.titleLabel.lineBreakMode;
             self.contentLabel.numberOfLines = 0;
-            
+            self.contentLabel.textAlignment = UITextAlignmentCenter;
             [self addSubview:self.contentLabel];
         }
         
@@ -306,12 +311,13 @@ static NSMutableDictionary *_notificationDesign;
     
     if ([self.content length])
     {
+        CGSize textSize = [self.contentLabel.text sizeWithFont:self.contentLabel.font
+                                             constrainedToSize:CGSizeMake(self.contentLabel.frame.size.width, MAXFLOAT)
+                                                 lineBreakMode:self.contentLabel.lineBreakMode];
         self.contentLabel.frame = CGRectMake(self.textSpaceLeft,
                                              self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 5.0,
                                              screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
-                                             0.0);
-        [self.contentLabel sizeToFit];
-        
+                                             textSize.height);
         currentHeight = self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height;
     }
     else

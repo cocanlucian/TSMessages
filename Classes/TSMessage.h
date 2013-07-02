@@ -15,7 +15,8 @@ typedef enum {
     TSMessageNotificationTypeWarning,
     TSMessageNotificationTypeError,
     TSMessageNotificationTypeSuccess,
-    TSMessageNotificationTypeZongaError
+    TSMessageNotificationTypeZongaError,
+    TSMessageNotificationTypeZongaMessage
 } TSMessageNotificationType;
 
 typedef enum {
