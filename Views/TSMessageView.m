@@ -122,6 +122,11 @@ static NSMutableDictionary *_notificationDesign;
                 currentString = @"zonga_error";
                 break;
             }
+            case TSMessageNotificationTypeZongaWarning:
+            {
+                currentString = @"zonga_warning";
+                break;
+            }
             case TSMessageNotificationTypeZongaMessage:
             {
                 currentString = @"zonga_message";

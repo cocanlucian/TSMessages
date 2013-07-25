@@ -249,7 +249,7 @@ static BOOL notificationActive;
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
-         currentView.center = toPoint;
+         currentView.center = CGPointMake(toPoint.x, toPoint.y);
          currentView.alpha = TSMessageViewAlpha;
      } completion:^(BOOL finished) {
          currentView.messageIsFullyDisplayed = YES;
