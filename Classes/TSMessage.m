@@ -319,10 +319,12 @@ static BOOL notificationActive;
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
-        if (currentMessage.messageIsFullyDisplayed)
-        {
-            [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
+        if ([[TSMessage sharedMessage].messages count] > 0) {
+            TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
+            if (currentMessage.messageIsFullyDisplayed)
+            {
+                [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
+            }
         }
     });
     return YES;

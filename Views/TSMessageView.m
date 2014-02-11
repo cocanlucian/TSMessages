@@ -191,7 +191,7 @@ static NSMutableDictionary *_notificationDesign;
             [self.contentLabel setShadowOffset:self.titleLabel.shadowOffset];
             self.contentLabel.lineBreakMode = self.titleLabel.lineBreakMode;
             self.contentLabel.numberOfLines = 0;
-            self.contentLabel.textAlignment = UITextAlignmentCenter;
+            self.contentLabel.textAlignment = NSTextAlignmentCenter;
             [self addSubview:self.contentLabel];
         }
         
